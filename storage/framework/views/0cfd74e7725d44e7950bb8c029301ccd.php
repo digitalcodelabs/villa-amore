@@ -21,14 +21,9 @@
     <img src="<?php echo e(asset('uploads/images/menu-image.jpg')); ?>" alt="Navigation background" class="nav-background">
     <div class="nav-content">
       <div class="nav-grid">
-        <a href="#book" class="nav-link">Book your stay</a>
-        <a href="#retreats" class="nav-link">Retreats</a>
-        <a href="#cooking" class="nav-link">Cooking Experiences</a>
-        <a href="#prosecco" class="nav-link">Prosecco & Paint</a>
-        <a href="#weddings" class="nav-link">Weddings & Events</a>
-        <a href="#organizers" class="nav-link">For Retreat Organizers</a>
-        <a href="#about" class="nav-link">About Us</a>
-        <a href="#contact" class="nav-link">Contact</a>
+        <?php $__currentLoopData = $navPages ?? []; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $page): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+          <a href="<?php echo e(route('page.show', $page->slug)); ?>" class="nav-link"><?php echo e($page->title); ?></a>
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
       </div>
     </div>
   </nav><?php /**PATH /var/www/villa-amore/resources/views/partials/nav.blade.php ENDPATH**/ ?>

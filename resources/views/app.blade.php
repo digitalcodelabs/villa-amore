@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Villa Amore - Your Dream Destination</title>
-  <meta name="description" content="Villa Amore is a luxury villa in Tuscany, Italy. It is a perfect destination for a romantic getaway, a family vacation, or a business trip.">
+  <title>@yield('title', 'Villa Amore - Your Dream Destination')</title>
+  <meta name="description" content="@yield('meta_description', 'Villa Amore is a luxury villa in Tuscany, Italy. It is a perfect destination for a romantic getaway, a family vacation, or a business trip.')">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

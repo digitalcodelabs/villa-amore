@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 class Page extends Model
@@ -24,6 +25,8 @@ class Page extends Model
         'meta_keywords',
         'is_published',
         'published_at',
+        'show_in_navigation',
+        'navigation_order',
     ];
 
     /**
@@ -36,6 +39,7 @@ class Page extends Model
         return [
             'is_published' => 'boolean',
             'published_at' => 'datetime',
+            'show_in_navigation' => 'boolean',
         ];
     }
 
@@ -66,5 +70,33 @@ class Page extends Model
     {
         return $query->where('is_published', true)
                     ->where('published_at', '<=', now());
+    }
+
+    /**
+     * Get the modules for this page.
+     */
+    public function modules(): HasMany
+    {
+        return $this->hasMany(PageModule::class)->where('is_active', true)->orderBy('order');
+    }
+
+    /**
+     * Get all modules with their relationships loaded.
+     */
+    public function getModulesWithData()
+    {
+        return $this->modules()->with([
+            'moduleable' => function ($query) {
+                if (method_exists($query->getModel(), 'slides')) {
+                    $query->with('slides');
+                }
+                if (method_exists($query->getModel(), 'images')) {
+                    $query->with('images');
+                }
+                if (method_exists($query->getModel(), 'items')) {
+                    $query->with('items');
+                }
+            }
+        ])->get();
     }
 }
