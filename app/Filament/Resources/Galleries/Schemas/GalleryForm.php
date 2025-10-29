@@ -41,6 +41,10 @@ class GalleryForm
                                     ->image()
                                     ->disk('public')
                                     ->directory('galleries')
+                                    ->visibility('public')
+                                    ->imageEditor()
+                                    ->downloadable()
+                                    ->openable()
                                     ->columnSpanFull(),
 
                                 TextInput::make('alt_text')
